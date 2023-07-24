@@ -1,0 +1,71 @@
+﻿@model List<nomina.Models.DTO.UserDTO>
+
+@{
+    ViewBag.Title = "Index";
+
+}
+
+<h2>User List</h2>
+
+
+
+
+    <a href="@Url.Action("Create","User")" class="btn btn-success">Create</a>
+    <a href="@Url.Action("RolesList","User")" class="btn btn-primary">Roles Usuario </a>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+
+                <th>Name</th>
+                <th>Last name</th>
+                <th>Email</th>
+                <th>Email</th>
+                <th>Telephone</th>
+                <th>Password</th>
+                <th>Type payment</th>
+                <th>Amount salary</th>
+                <th>Role id</th>
+                <th>State</th>
+                <th>Update date</th>
+                <th>Update user</th>
+                <th>Create date</th>
+                <th>Create user</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var user in Model)
+            {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Name</td>
+                <td>@user.Last_Name</td>
+                <td>@user.Email</td>
+                <td>@user.Telephone_number</td>
+                <td>@user.Department_id</td>
+                <td>@user.Password</td>
+                <td>@user.Type_payment</td>
+                <td>@user.Amount_salary</td>
+                <td>@user.Role_id</td>
+                <td>@user.State</td>
+                <td>@user.Update_date</td>
+                <td>@user.Update_user</td>
+                <td>@user.Create_date</td>
+                <td>@user.Create_user</td>
+                <td>
+                    <a href="@Url.Action("Edit", "User", new { id = user.Id })" class="btn btn-success">Edit</a>
+
+
+                </td>
+                <td>
+                    <a href="@Url.Action("Delete", "User", new { id = user.Id })" class="btn btn-danger"> Delete</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+
