@@ -1,0 +1,46 @@
+﻿@model List<nomina.Models.Roles>
+
+@{
+    ViewBag.Title = "Role List";
+
+}
+
+<h2>User List</h2>
+
+
+
+
+<a href="@Url.Action("Create","User")" class="btn btn-success">Create</a>
+<a href="@Url.Action("RolesList","User")" class="btn btn-primary">Roles Usuario </a>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Descripcion</th>
+
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var role in Model)
+        {
+            <tr>
+                <td>@role.Id</td>
+                <td>@role.Description</td>
+
+                <td>
+                    <a href="@Url.Action("Edit", "User", new { id = role.Id })" class="btn btn-success">Editx</a>
+
+
+                </td>
+                <td>
+                    <a href="@Url.Action("Delete", "User", new { id = role.Id })" class="btn btn-danger"> Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

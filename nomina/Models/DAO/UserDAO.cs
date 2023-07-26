@@ -59,5 +59,42 @@ namespace nomina.Models.DAO
             return users;
         }
 
+
+        public List<Roles> ReadRoles()
+        {
+            List<Roles> roles = new List<Roles>();
+
+            try
+            {
+                using (MySqlConnection connection = Config.GetConnection())
+                {
+                    connection.Open();
+                    string selectQuery = "SELECT * FROM tb_roles";
+
+                    using (MySqlCommand command = new MySqlCommand(selectQuery, connection))
+                    {
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Roles role = new Roles();
+                                role.Id = reader.GetInt32("id");
+                                role.Description = reader.GetString("description");
+
+                                roles.Add(role);
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in nomina.Models.DAO.Roles.InserUser:" + ex.Message);
+            }
+            return roles;
+        }
+
     }
 }

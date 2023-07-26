@@ -14,11 +14,17 @@ namespace nomina.Controllers
         // GET: User
         public ActionResult Index()
         {
-
             // Devuelve la vista Index con la lista de usuarios
             return View(userRepository.ReadUsers());
         }
 
-
+        public ActionResult RolesList()
+        {
+            // Devuelve la vista Index con la lista de usuarios
+            return View(userRepository.ReadRoles());
+        }
     }
+
+
+  
 }
