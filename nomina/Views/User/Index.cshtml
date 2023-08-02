@@ -10,7 +10,7 @@
 
 
 
-    <a href="@Url.Action("Create","User")" class="btn btn-success">Create</a>
+    <a href="@Url.Action("CreateUser","User")" class="btn btn-success">Create</a>
     <a href="@Url.Action("RolesList","User")" class="btn btn-primary">Roles Usuario </a>
     <br />
     <table class="table">
@@ -45,10 +45,12 @@
                 <td>@user.Last_Name</td>
                 <td>@user.Email</td>
                 <td>@user.Telephone_number</td>
+
                 <td>@user.Department_id</td>
                 <td>@user.Password</td>
                 <td>@user.Type_payment</td>
                 <td>@user.Amount_salary</td>
+
                 <td>@user.Role_id</td>
                 <td>@user.State</td>
                 <td>@user.Update_date</td>

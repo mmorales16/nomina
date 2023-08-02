@@ -1,0 +1,64 @@
+﻿@model nomina.Models.DTO.UserDTO
+@{
+    ViewBag.Title = "CreateUser";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    <div>
+        <h2>Razor way</h2>
+        @using (Html.BeginForm("CreateUser", "User", FormMethod.Post, new { @class = "form" }))
+        {
+            <div class="form-group">
+                <label>Name:</label>
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label>Last_Name:</label>
+                @Html.TextBoxFor(model => model.Last_Name, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label>Email:</label>
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label>Telephone_number:</label>
+                @Html.TextBoxFor(model => model.Telephone_number, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label>Department_id:</label>
+                @Html.TextBoxFor(model => model.Department_id, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label>Password:</label>
+                @Html.TextBoxFor(model => model.Password, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label>Role:</label>
+                @Html.DropDownListFor(model => model.Role_id, (SelectList)ViewBag.Roles, "Select a role", new { @class = "form-control" })
+
+            </div>
+
+
+
+            <button type="submit" class="btn btn-primary">Save</button>
+        }
+    </div>
+
+</body>
+</html>
+
+
+
+

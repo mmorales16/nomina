@@ -16,7 +16,6 @@ namespace nomina.Models.DTO
         public string Email { get; set; }
         public string Telephone_number { get; set; }
         public int Department_id { get; set; }
-
         public string Password { get; set; }
         public string Type_payment { get; set; }
         public decimal Amount_salary { get; set; }

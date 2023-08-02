@@ -96,5 +96,59 @@ namespace nomina.Models.DAO
             return roles;
         }
 
+
+        public string InsertUser(UserDTO user)
+
+
+        {
+            string response = "Failed";
+
+            try
+            {
+                using (MySqlConnection connection = Config.GetConnection())
+                {
+                    connection.Open();
+
+                    string insertUserQuery = "INSERT INTO tb_users (name, last_name, email, telephone_number, department_id, password, type_payment, amount_salary, role_id, state, update_date, update_user, create_date, create_user ) VALUES (@name, @last_name, @email, @telephone_number, @department_id, @password, @type_payment, @amount_salary, @role_id, @state, @update_date, @update_user, @create_date, @create_user)";
+
+
+                    using (MySqlCommand userCommand = new MySqlCommand(insertUserQuery, connection))
+                    {
+                        userCommand.Parameters.AddWithValue("@name", user.Name);
+                        userCommand.Parameters.AddWithValue("@last_name", user.Last_Name);
+                        userCommand.Parameters.AddWithValue("@email", user.Email);
+                        userCommand.Parameters.AddWithValue("@telephone_number", user.Telephone_number);
+                        userCommand.Parameters.AddWithValue("@department_id", user.Department_id);
+                        userCommand.Parameters.AddWithValue("@password", user.Password);
+                        userCommand.Parameters.AddWithValue("@type_payment", string.IsNullOrEmpty(user.Type_payment) ? "" : user.Type_payment);
+                        userCommand.Parameters.AddWithValue("@amount_salary", user.Amount_salary);
+                        userCommand.Parameters.AddWithValue("@role_id", user.Role_id);
+                        // Asignar el valor fijo "active" al parámetro @state
+                        userCommand.Parameters.AddWithValue("@state", "active");
+                        userCommand.Parameters.AddWithValue("@update_date", user.Update_date);
+                        userCommand.Parameters.AddWithValue("@update_user", string.IsNullOrEmpty(user.Update_user) ? "MMORALES" : user.Update_user);
+                        // Asignar automáticamente la fecha y hora actual al parámetro @create_date
+                        userCommand.Parameters.AddWithValue("@create_date", DateTime.Now);
+                        userCommand.Parameters.AddWithValue("@create_user", string.IsNullOrEmpty(user.Create_user) ? "ADMIN" : user.Create_user);
+
+                        int rowsAffected = userCommand.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            response = "Success";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in UserDAO.InsertUser: " + ex.Message);
+            }
+
+            return response;
+        }
+
+
+
     }
 }
