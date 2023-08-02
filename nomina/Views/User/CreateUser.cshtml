@@ -11,7 +11,15 @@
 </head>
 <body>
     <div>
-        <h2>Razor way</h2>
+        <h2>New User</h2>
+
+        <!-- Mostrar el mensaje de alerta genérico en caso de otro error -->
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <br />
+            <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+        }
+
         @using (Html.BeginForm("CreateUser", "User", FormMethod.Post, new { @class = "form" }))
         {
             <div class="form-group">
@@ -50,10 +58,10 @@
 
             </div>
 
-
-
             <button type="submit" class="btn btn-primary">Save</button>
         }
+
+
     </div>
 
 </body>
