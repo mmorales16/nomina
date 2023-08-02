@@ -149,6 +149,37 @@ namespace nomina.Models.DAO
         }
 
 
+        public bool ValidateUser(string email, string password)
+        {
+            try
+            {
+                using (MySqlConnection connection = Config.GetConnection())
+                {
+                    connection.Open();
+                    string selectQuery = "SELECT COUNT(*) FROM tb_users WHERE email = @Email AND password = @Password";
+
+                    using (MySqlCommand command = new MySqlCommand(selectQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@Email", email);
+                        command.Parameters.AddWithValue("@Password", password);
+
+                        int count = Convert.ToInt32(command.ExecuteScalar());
+                        return count > 0; // Si count es mayor a 0, las credenciales son válidas.
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error in nomina.Models.DAO.UserDAO.ValidateUser: " + ex.Message);
+                return false; // En caso de error, consideramos las credenciales inválidas.
+            }
+        }
+
+
+
+
+
+
 
     }
 }

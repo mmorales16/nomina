@@ -1,0 +1,140 @@
+﻿@model nomina.Models.DTO.UserDTO
+@{
+    ViewBag.Title = "Login";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-XZ1tydpuHp3Gi3FVWg4o0Vxsiy+P7UJ/8FKC+k+Xj58axqxnhv0F21ZqDla9xJgNpJOPyCBBPmWUZjT7aGC6Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Login</title>
+    <!-- Agregar los estilos CSS personalizados -->
+    <style>
+        body {
+            background-color: #f2f2f2;
+        }
+
+        form {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            width: 350px;
+            margin: 0 auto;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+            input[type="submit"]:hover {
+                background-color: #45a049;
+            }
+
+        .button {
+            text-align: center;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .login-container .alert {
+            margin-bottom: 10px;
+        }
+
+        .login-container button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Welcome</h2>
+
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+        }
+
+        <br />
+
+        @using (Html.BeginForm("Login", "User", FormMethod.Post, new { @class = "form", id = "loginForm" }))
+        {
+
+            <label style="" for="Email">Email:</label>
+            <div class="form-group" style="display: inline-flex; width: 300px; height: 55px; text-align: center; border: 0px solid #ff0000; padding: 4px 4px">
+                <div style="display: inline-flex; width: 35px; height: 45px; text-align: center; border: 0px solid #007bff; padding: 4px 4px; ">
+                    <label style="" for="Password">
+                        <span class="" style="display: inline-flex; height: 35px; width: 35px; text-align: center; padding: 3px 5px; border: 1px solid #45a049; border-radius: 15px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                            </svg>
+                        </span>
+                    </label>
+                </div>
+                <div style="display: inline-flex; width: 270px; height: 45px; text-align: center; border: 0px solid #007bff; padding: 4px 10px; " for="Password">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", type = "email" })
+                </div>
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+
+
+            <label style="" for="Email">Password:</label>
+            <div class="form-group" style="display: inline-flex; width: 300px; height: 55px; text-align: center; border: 0px solid #ff0000; padding: 4px 4px">
+                <div style="display: inline-flex; width: 35px; height: 45px; text-align: center; border: 0px solid #007bff; padding: 4px 4px; ">
+                    <label style="" for="Password">
+                        <span class="" style="display: inline-flex; height: 35px; width: 35px; text-align: center; padding: 3px 5px; border: 1px solid #0a93f6; border-radius: 15px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                                <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+                            </svg>
+                        </span>
+                    </label>
+                </div>
+                <div style="display: inline-flex; width: 270px; height: 45px; text-align: center; border: 0px solid #007bff; padding: 4px 10px; " for="Password">
+                    @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+
+            <button type="submit" class="btn btn-primary">Accept</button>
+        }
+    </div>
+   
+
+</body>
+</html>

@@ -66,6 +66,39 @@ namespace nomina.Controllers
             return View(user);
         }
 
+ 
+  
+            [HttpGet]
+            public ActionResult Login()
+            {
+                // Muestra la vista de inicio de sesión
+                return View();
+            }
+
+            [HttpPost]
+            public ActionResult Login(UserDTO user)
+            {
+                if (ModelState.IsValid)
+                {
+                    UserDAO userDAO = new UserDAO();
+                    bool isValidCredentials = userDAO.ValidateUser(user.Email, user.Password);
+
+                    if (isValidCredentials)
+                    {
+                    // Credenciales válidas, permite el acceso (por ejemplo, redirige a la página de inicio)
+                    return RedirectToAction("Index");
+                }
+                    else
+                {
+                    // Credenciales inválidas, muestra mensaje de error
+                    ViewBag.ErrorMessage = "Incorrect credentials, check the email and password";
+                }
+            }
+
+                // Si el modelo no es válido o las credenciales son inválidas, vuelve a mostrar la vista de inicio de sesión con los errores
+                return View(user);
+            }
+    
 
 
 
@@ -74,5 +107,5 @@ namespace nomina.Controllers
     }
 
 
-  
+
 }
