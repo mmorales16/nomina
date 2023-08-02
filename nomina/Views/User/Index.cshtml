@@ -10,35 +10,47 @@
 
 
 
-    <a href="@Url.Action("CreateUser","User")" class="btn btn-success">Create</a>
-    <a href="@Url.Action("RolesList","User")" class="btn btn-primary">Roles Usuario </a>
-    <br />
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
+<a href="@Url.Action("CreateUser","User")" class="btn btn-success">Create</a>
+<a href="@Url.Action("RolesList","User")" class="btn btn-primary">Roles Usuario </a>
 
-                <th>Nombre</th>
-                <th>Last name</th>
-                <th>Email</th>
-                <th>Telephone</th>
-                <th>Departament</th>
-                <th>Password</th>
-                <th>Type payment</th>
-                <th>Amount salary</th>
-                <th>Role id</th>
-                <th>State</th>
-                <th>Update date</th>
-                <th>Update user</th>
-                <th>Create date</th>
-                <th>Create user</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+<!-- Agregar un formulario para la búsqueda de usuarios -->
 
-            @foreach (var user in Model)
-            {
+<form method="get" action="@Url.Action("Index", "User")">
+    <div class="form-group">
+        <br />
+        <label for="searchKeyword">Search:</label>
+        <input type="text" class="form-control" name="searchKeyword" placeholder="Enter name or email " style="display: inline-flex; height: 35px; width: 250px; text-align: center; padding: 3px 5px; border: 1px solid #0a93f6; border-radius: 10px;">
+        <button type="submit" class="btn btn-primary" style="display: inline-flex;">Search</button>
+    </div>
+</form>
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+
+            <th>Nombre</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Telephone</th>
+            <th>Departament</th>
+            <th>Password</th>
+            <th>Type payment</th>
+            <th>Amount salary</th>
+            <th>Role id</th>
+            <th>State</th>
+            <th>Update date</th>
+            <th>Update user</th>
+            <th>Create date</th>
+            <th>Create user</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var user in Model)
+        {
             <tr>
                 <td>@user.Id</td>
                 <td>@user.Name</td>
@@ -66,8 +78,8 @@
                     <a href="@Url.Action("Delete", "User", new { id = user.Id })" class="btn btn-danger"> Delete</a>
                 </td>
             </tr>
-            }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>
 
 

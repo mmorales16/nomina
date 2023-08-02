@@ -10,7 +10,7 @@ namespace nomina.Models.DAO
 {
     public class UserDAO
     {
-        public List<UserDTO> ReadUsers()
+        public List<UserDTO> ReadUsers(string searchKeyword)
         {
             List<UserDTO> users = new List<UserDTO>();
 
@@ -19,10 +19,12 @@ namespace nomina.Models.DAO
                 using (MySqlConnection connection = Config.GetConnection())
                 {
                     connection.Open();
-                    string selectQuery = "SELECT * FROM tb_users";
+                    string selectQuery = "SELECT * FROM tb_users WHERE name LIKE @searchKeyword OR email LIKE @searchKeyword";
 
                     using (MySqlCommand command = new MySqlCommand(selectQuery, connection))
                     {
+                        command.Parameters.AddWithValue("@searchKeyword", "%" + searchKeyword + "%");
+
                         using (MySqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
@@ -36,7 +38,6 @@ namespace nomina.Models.DAO
                                 user.Department_id = reader.GetInt32("department_id");
                                 user.Password = reader.GetString("password");
                                 user.Type_payment = reader.GetString("type_payment");
-
                                 user.Amount_salary = reader.GetDecimal("amount_salary");
                                 user.Role_id = reader.GetInt32("role_id");
                                 user.State = reader.GetString("state");
@@ -50,11 +51,9 @@ namespace nomina.Models.DAO
                     }
                 }
             }
-
-
             catch (Exception ex)
             {
-                Console.WriteLine("Error in nomina.Models.DAO.UserDAO.InserUser:" + ex.Message);
+                Console.WriteLine("Error in nomina.Models.DAO.UserDAO.ReadUsers:" + ex.Message);
             }
             return users;
         }

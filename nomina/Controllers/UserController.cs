@@ -13,10 +13,10 @@ namespace nomina.Controllers
     {
         private UserDAO userRepository = new UserDAO();
         // GET: User
-        public ActionResult Index()
+        public ActionResult Index(string searchKeyword)
         {
             // Devuelve la vista Index con la lista de usuarios
-            return View(userRepository.ReadUsers());
+            return View(userRepository.ReadUsers(searchKeyword));
         }
 
         public ActionResult RolesList()
