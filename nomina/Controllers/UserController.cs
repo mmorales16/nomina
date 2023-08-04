@@ -98,14 +98,78 @@ namespace nomina.Controllers
                 // Si el modelo no es válido o las credenciales son inválidas, vuelve a mostrar la vista de inicio de sesión con los errores
                 return View(user);
             }
-    
 
+        public ActionResult Edit(int id)
+        {
+            try
+            {
+                // Intenta obtener un usuario específico utilizando el método GetUserById del repositorio UserDAO
+                UserDTO user = userRepository.GetUserById(id);
+                if (user != null)
+                {
+                    // Si el usuario existe, muestra la vista de edición con los detalles del usuario
+                    return View(user);
+                }
+                else
+                {
+                    Console.WriteLine("User not found");
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error getting user: " + ex.Message);
+                return RedirectToAction("Index");
+            }
+        }
 
+        // POST: User/Edit/
+        [HttpPost]
+        public ActionResult Edit(UserDTO user)
+        {
+            try
+            {
+                // Intenta actualizar los detalles del usuario utilizando el método UpdateUser del repositorio UserDAO
+                string result = userRepository.UpdateUser(user);
+                Console.WriteLine("User updated: " + result);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error updating user: " + ex.Message);
+                return View(user);
+            }
+        }
+        // GET: User/Delete/
+        public ActionResult Delete(int id)
+        {
+            // Obtiene un usuario específico utilizando el método GetUserById del repositorio UserDAO
+            UserDTO user = userRepository.GetUserById(id);
+            if (user == null)
+            {
+                // El usuario no existe, mostrar mensaje de error o redirigir a otra vista
+                return RedirectToAction("Index");
+            }
 
-
-
+            return View(user);
+        }
+        // POST: User/Delete/
+        [HttpPost]
+        [ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                // Intenta eliminar el usuario utilizando el método DeleteUser del repositorio UserDAO
+                string result = userRepository.DeleteUser(id);
+                Console.WriteLine("User deleted: " + result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error deleting user: " + ex.Message);
+            }
+            // Redirige a la vista Index después de eliminar el usuario
+            return RedirectToAction("Index");
+        }
     }
-
-
-
 }
