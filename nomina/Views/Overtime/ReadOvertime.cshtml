@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "ReadOvertime";
+}
+
+<h2>ReadOvertime</h2>
+
+<a href="@Url.Action("Create","User")" class="btn btn-success">Create</a>
+<a href="@Url.Action("RolesList","User")" class="btn btn-primary">Roles Usuario </a>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Descripcion</th>
+
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var overtime in Model)
+        {
+            <tr>
+                <td>@overtime.Overtime_id</td>
+                <td>@overtime.Overtime_description</td>
+
+                <td>
+                    <a href="@Url.Action("Edit", "User", new { id = overtime.Overtime_id })" class="btn btn-success">Editx</a>
+                    <a href="@Url.Action("Edit", "User", new { id = overtime.Overtime_id })" class="btn btn-success">Editx</a>
+
+                </td>
+                <td>
+                    <a href="@Url.Action("Delete", "User", new { id = overtime.Overtime_id })" class="btn btn-danger"> Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

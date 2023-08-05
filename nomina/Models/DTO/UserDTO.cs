@@ -24,8 +24,7 @@ namespace nomina.Models.DTO
         public DateTime Update_date { get; set; }
         public string Update_user { get; set; }
         public DateTime Create_date { get; set; }
-        public string Create_user { get; set; }
-
+        public string Create_user { get; set; }       
 
     }
 }

@@ -2,9 +2,7 @@
 using nomina.Models.DAO;
 using nomina.Models.DTO;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace nomina.Controllers
@@ -32,6 +30,7 @@ namespace nomina.Controllers
             ViewBag.Roles = new SelectList(roles, "id", "Description");
             return View();
         }
+
 
 
         // POST: User/Create
@@ -66,38 +65,47 @@ namespace nomina.Controllers
             return View(user);
         }
 
- 
-  
-            [HttpGet]
-            public ActionResult Login()
-            {
-                // Muestra la vista de inicio de sesión
-                return View();
-            }
 
-            [HttpPost]
-            public ActionResult Login(UserDTO user)
+
+        [HttpGet]
+        public ActionResult Login()
+        {
+            // Muestra la vista de inicio de sesión
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(UserDTO user)
+        {
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                UserDAO userDAO = new UserDAO();
+                bool isValidCredentials = userDAO.ValidateUser(user.Email, user.Password);
+
+                if (isValidCredentials)
                 {
-                    UserDAO userDAO = new UserDAO();
-                    bool isValidCredentials = userDAO.ValidateUser(user.Email, user.Password);
-
-                    if (isValidCredentials)
-                    {
                     // Credenciales válidas, permite el acceso (por ejemplo, redirige a la página de inicio)
                     return RedirectToAction("Index");
                 }
-                    else
+                else
                 {
                     // Credenciales inválidas, muestra mensaje de error
                     ViewBag.ErrorMessage = "Incorrect credentials, check the email and password";
                 }
             }
 
+<<<<<<< Updated upstream
                 // Si el modelo no es válido o las credenciales son inválidas, vuelve a mostrar la vista de inicio de sesión con los errores
                 return View(user);
             }
+=======
+            // Si el modelo no es válido o las credenciales son inválidas, vuelve a mostrar la vista de inicio de sesión con los errores
+            return View(user);
+        }
+
+
+
+>>>>>>> Stashed changes
 
         public ActionResult Edit(int id)
         {

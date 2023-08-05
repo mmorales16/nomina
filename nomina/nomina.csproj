@@ -172,12 +172,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OvertimeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Config.cs" />
+    <Compile Include="Models\DAO\OvertimeDAO.cs" />
     <Compile Include="Models\DAO\UserDAO.cs" />
+    <Compile Include="Models\DTO\OvertimeDTO.cs" />
     <Compile Include="Models\DTO\UserDTO.cs" />
     <Compile Include="Models\Roles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -222,8 +225,13 @@
     <Content Include="Views\User\RolesList.cshtml" />
     <Content Include="Views\User\CreateUser.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
+<<<<<<< Updated upstream
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
+=======
+    <Content Include="Views\Overtime\CreateOvertime.cshtml" />
+    <Content Include="Views\Overtime\ReadOvertime.cshtml" />
+>>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

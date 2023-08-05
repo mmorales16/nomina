@@ -147,7 +147,6 @@ namespace nomina.Models.DAO
             return response;
         }
 
-
         public bool ValidateUser(string email, string password)
         {
             try
