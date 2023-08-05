@@ -1,6 +1,4 @@
-﻿[20:22] Eddy Ricardo Vega Guevara
-
-OvertimeDao
+﻿
 
 using MySql.Data.MySqlClient;
 
