@@ -12,11 +12,10 @@
 
 <a href="@Url.Action("CreateUser","User")" class="btn btn-success">Create</a>
 <a href="@Url.Action("RolesList","User")" class="btn btn-primary">Roles Usuario </a>
-<a href="@Url.Action("CreateOvertime","Overtime")" class="btn btn-success">Create Overtime</a>
 
 <!-- Agregar un formulario para la búsqueda de usuarios -->
 
-<form method="get" action="@Url.Action("Index", "User", "Overtime")>
+<form method="get" action="@Url.Action("Index", "User")">
     <div class="form-group">
         <br />
         <label for="searchKeyword">Search:</label>
